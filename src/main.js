@@ -1,4 +1,5 @@
 import rp from 'request-promise'
+import existingDash from '../existing_dash.json'
 import {
   controllerHostName,
   isHTTPS,
@@ -8,7 +9,11 @@ import {
   accountName,
 } from '../config.json'
 
-const baseURL = `${isHTTPS ? 'https' : 'http'}://${controllerHostName}/controller`
+const DASHBOARD_NAME = 'z_dan_1111'
+
+const baseURL = `${
+  isHTTPS ? 'https' : 'http'
+}://${controllerHostName}/controller`
 
 // Build base options for each rest call
 const options = {
@@ -20,25 +25,31 @@ const options = {
     sendImmediately: true,
   },
 }
+
+const dashObj = { ...existingDash, DASHBOARD_NAME }
+
+const formData = {
+  file: {
+    value: Buffer.from(JSON.stringify(dashObj)),
+    options: {
+      filename: 'existing_dash.json',
+    },
+  },
+}
+
 rp({
   ...options,
-  url: `${baseURL}/rest/applications/3843/tiers/JVM_SCHEDULER/nodes?output=JSON`,
+  url: `${baseURL}/CustomDashboardImportExportServlet`,
+  method: 'POST',
+  headers: {
+    'Content-type': 'multipart/form-data',
+  },
+  formData,
 })
-  // get the list of applications
   .promise()
   .then(data => {
-    const nodes = JSON.parse(data)
-      .filter(({ name }) => name !== 'LRPTRSMSCH01_T00sc')
-      .map(({ id }) => id)
-      .slice(0, 24)
-      .join(',')
-    console.log(nodes)
-    console.log(`${baseURL}/rest/mark-nodes-historical?application-component-node-ids=${nodes}`)
-
-    rp({
-      ...options,
-      url: `${baseURL}/rest/mark-nodes-historical?application-component-node-ids=${nodes}`,
-      method: 'POST',
-    })
-    // console.log(apps)
+    console.log(data)
+  })
+  .catch(err => {
+    console.log(err)
   })
