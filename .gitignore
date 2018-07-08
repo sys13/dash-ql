@@ -1,0 +1,5 @@
+/lib/*
+node_modules
+config.json
+analytics-agent/logs
+*.csv
