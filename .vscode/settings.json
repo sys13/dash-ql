@@ -1,0 +1,5 @@
+{
+  "editor.snippetSuggestions": "top",
+  "prettier.eslintIntegration": true,
+  "prettier.tabWidth": 2
+}
