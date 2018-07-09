@@ -1,15 +1,13 @@
-import existingDash from '../existing_dash.json'
 import createDashboard from './createDashboard'
+import createLabelListDashboard from './createLabelListDashboard'
 import getBTNames from './getBTNames'
 
 const main = async () => {
-  const DASHBOARD_NAME = 'z_dan_1111'
-  const dashObj = { ...existingDash, DASHBOARD_NAME }
-
+  const DASHBOARD_NAME = 'z_dan_2'
   const btNames = await getBTNames()
-  console.log(btNames)
+  const nameListDash = createLabelListDashboard({ list: btNames })
 
-  // createDashboard({ dashObj })
+  createDashboard({ dashObj: { ...nameListDash, name: DASHBOARD_NAME } })
 }
 
 main()
