@@ -7,10 +7,10 @@ const METRIC_PATH_ENCODED = querystring.stringify({
   'metric-path': METRIC_PATH,
 })
 
-export default async () => {
+export default async ({ applicationName }) => {
   return await rp({
     ...options,
-    url: `${baseURL}/rest/applications/64/metrics?output=json&${METRIC_PATH_ENCODED}`,
+    url: `${baseURL}/rest/applications/${applicationName}/metrics?output=json&${METRIC_PATH_ENCODED}`,
   })
     .promise()
     .then(data => {
@@ -25,7 +25,7 @@ export default async () => {
     })
 }
 
-// First level hierarchy
+// Application first level hierarchy
 // [
 //     {
 //     "name": "Errors",

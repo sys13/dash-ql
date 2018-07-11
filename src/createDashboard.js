@@ -2,11 +2,16 @@ import { options, baseURL } from './requestOptions'
 import rp from 'request-promise'
 
 export default ({ dashObj }) => {
+  if (dashObj === undefined || dashObj === null) {
+    console.console.error('no dashboard obj')
+    return
+  }
+
   const formData = {
     file: {
       value: Buffer.from(JSON.stringify(dashObj)),
       options: {
-        filename: 'existing_dash.json',
+        filename: 'name_does_not_matter.json',
       },
     },
   }
