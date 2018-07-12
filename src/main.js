@@ -1,27 +1,34 @@
-import createDashboard from './createDashboard'
-import createBTDashboard from './createBTDashboard'
+import _ from 'lodash'
+import queryParser, { getApplicationFromWheres } from './queryParser'
 import { getBTs } from './getAppModel'
-import queryParser from './queryParser'
+import getColumnFromSelect from './getColumnFromSelect'
+import base from './widgetTemplates/base'
+import createDashboard from './createDashboard'
 
 const main = async () => {
   const DASHBOARD_NAME = 'z_dan_2'
-  const applicationName = '2075ICE.PREPROD'
+  const query =
+    'SELECT bt, art, cpm, epm FROM applications WHERE application = "2075ICE.PREPROD"'
 
-  const QUERY =
-    'SELECT backends, art FROM applications WHERE application = "2075ICE.PREPROD"'
-  // const bts = await getBTs({ applicationName })
+  const { selects, from, wheres } = queryParser({ query })
 
-  const parsedQuery = queryParser({ query: QUERY })
-  console.log(parsedQuery)
+  // TODO: maybe this should be a gather data method
+  // TODO: only get bt info if in select
+  const applicationName = getApplicationFromWheres({ wheres })
+  const bt = await getBTs({ applicationName })
+  const data = { bt }
 
-  // const nameListDash = createBTDashboard({
-  //   bts,
-  //   applicationName,
-  // })
-  // debugger
-  // // console.log(nameListDash)
+  const widgets = selects.map((s, index) =>
+    getColumnFromSelect({ selects, selectIndex: index, data, wheres })
+  )
+  const dashObj = {
+    ...base,
+    widgetTemplates: _.flatten(widgets),
+    name: DASHBOARD_NAME,
+    width: 1200,
+  }
 
-  // createDashboard({ dashObj: { ...nameListDash, name: DASHBOARD_NAME } })
+  createDashboard({ dashObj })
 }
 
 main()

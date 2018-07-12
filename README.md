@@ -11,6 +11,31 @@ Create AppD dashboards at lightning speed with a query language
 
 ## Development
 
+### Features
+- [] default metric format strings
+- [] more than just bts
+- [] headers
+- [] CLI input
+- [] WHERE on a name/label
+- [] WHERE operators (>, <, REGEX, etc.)
+- [] WHERE on metric values (current art > x)
+- [] AS
+- [] SORT BY
+- [] LIMIT
+- [] query autocomplete
+- [] query validation
+- [] HR status lights
+- [] specify dashboard name
+- [] create multiple dashboards at once
+- [] save queries
+- [] more metric types: browser, mobile, DB, SIM
+- [] shortforms: (art = Average Response Time (ms), etc.)
+- [] styling/theming
+- [] add logo
+- [] table grid lines
+- [] electron app
+- [] preview dashboard before deploying
+
 ### Helpful Links
 
 API

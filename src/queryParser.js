@@ -26,6 +26,16 @@ const getWhere = ({ query }) => {
   return tokenizedWheres
 }
 
+export const getApplicationFromWheres = ({ wheres }) => {
+  let application = ''
+  wheres.forEach(({ field, value }) => {
+    if (field === 'application' || field === 'app') {
+      application = value
+    }
+  })
+  return application
+}
+
 export default ({ query }) => {
   const selects = getSelects({ query })
   const { from } = getFrom({ query })
