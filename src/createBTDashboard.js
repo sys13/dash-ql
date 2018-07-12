@@ -12,7 +12,6 @@ export default ({ bts, applicationName }) => {
     y: index * labelWidget.height,
     textAlign: 'LEFT',
   }))
-  debugger
   const responseTimes = bts.map(({ internalName, tierName }, index) => {
     return {
       ...metricWidget,
@@ -26,7 +25,5 @@ export default ({ bts, applicationName }) => {
       x: 300,
     }
   })
-  console.dir(responseTimes, 0, 2)
-  debugger
   return { ...base, widgetTemplates: [...labels, ...responseTimes] }
 }
