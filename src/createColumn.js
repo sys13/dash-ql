@@ -9,7 +9,7 @@ export const createLabelColumn = ({ labelTexts, x }) => {
     width: 300,
     height: 50,
     x,
-    y: index * labelWidget.height,
+    y: (index + 1) * labelWidget.height,
     textAlign: 'LEFT',
   }))
   return labels
@@ -27,10 +27,21 @@ export const createMetricColumn = ({ metricWidgetData, x }) => {
         }),
         width: 300,
         height: 50,
-        y: index * labelWidget.height,
         x,
+        y: (index + 1) * labelWidget.height,
       }
     }
   )
   return metrics
 }
+
+export const createHeader = ({ labelText, x }) => ({
+  ...labelWidget,
+  text: labelText,
+  width: 300,
+  height: 50,
+  x: x * 300,
+  y: 0,
+  textAlign: 'LEFT',
+  fontSize: 18,
+})

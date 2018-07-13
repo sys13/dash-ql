@@ -12,9 +12,10 @@ Create AppD dashboards at lightning speed with a query language
 ## Development
 
 ### Features
+- [x] headers
 - [] default metric format strings
+- [] add a title
 - [] more than just bts
-- [] headers
 - [] CLI input
 - [] WHERE on a name/label
 - [] WHERE operators (>, <, REGEX, etc.)
@@ -35,6 +36,7 @@ Create AppD dashboards at lightning speed with a query language
 - [] table grid lines
 - [] electron app
 - [] preview dashboard before deploying
+- [] share dashboard formulas
 
 ### Helpful Links
 
