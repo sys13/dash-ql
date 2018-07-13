@@ -7,8 +7,7 @@ import createDashboard from './createDashboard'
 
 const main = async () => {
   const DASHBOARD_NAME = 'z_dan_2'
-  const query =
-    'SELECT bt, art, cpm, epm FROM applications WHERE application = "2075ICE.PREPROD"'
+  const query = 'SELECT bt, art, cpm, epm FROM applications WHERE application = "2075ICE.PREPROD"'
 
   const { selects, from, wheres } = queryParser({ query })
 
@@ -18,9 +17,12 @@ const main = async () => {
   const bt = await getBTs({ applicationName })
   const data = { bt }
 
-  const widgets = selects.map((s, index) =>
-    getColumnFromSelect({ selects, selectIndex: index, data, wheres })
-  )
+  const widgets = selects.map((s, index) => getColumnFromSelect({
+    selects,
+    selectIndex: index,
+    data,
+    wheres,
+  }))
   const dashObj = {
     ...base,
     widgetTemplates: _.flatten(widgets),

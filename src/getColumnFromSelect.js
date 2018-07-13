@@ -9,9 +9,10 @@ import getMetricFromShortcut from './getMetricFromShortcut'
 const DEFAULT_WIDTH = 300
 const LABEL_ENTITIES = ['bt', 'tier', 'backend']
 
-export default ({ selects, selectIndex, data, wheres }) => {
+export default ({
+  selects, selectIndex, data, wheres,
+}) => {
   const select = selects[selectIndex]
-  debugger
   const header = createHeader({
     labelText: getMetricFromShortcut(select),
     x: selectIndex,
