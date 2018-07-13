@@ -13,10 +13,9 @@ Create AppD dashboards at lightning speed with a query language
 
 ### Features
 - [x] headers
-- [] default metric format strings
+- [x] default metric format strings
 - [] add a title
 - [] more than just bts
-- [] CLI input
 - [] WHERE on a name/label
 - [] WHERE operators (>, <, REGEX, etc.)
 - [] WHERE on metric values (current art > x)

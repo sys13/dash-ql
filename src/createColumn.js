@@ -15,7 +15,7 @@ export const createLabelColumn = ({ labelTexts, x }) => {
   return labels
 }
 
-export const createMetricColumn = ({ metricWidgetData, x }) => {
+export const createMetricColumn = ({ metricWidgetData, x, formatString }) => {
   const metrics = metricWidgetData.map(
     ({ applicationName, metricPath, entityName }, index) => {
       return {
@@ -29,8 +29,9 @@ export const createMetricColumn = ({ metricWidgetData, x }) => {
         height: 50,
         x,
         y: (index + 1) * labelWidget.height,
+        label: metricWidget.label || formatString,
       }
-    }
+    },
   )
   return metrics
 }

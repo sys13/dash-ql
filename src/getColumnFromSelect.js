@@ -14,7 +14,7 @@ export default ({
 }) => {
   const select = selects[selectIndex]
   const header = createHeader({
-    labelText: getMetricFromShortcut(select),
+    labelText: getMetricFromShortcut(select).metric,
     x: selectIndex,
   })
 
@@ -34,7 +34,7 @@ export default ({
     // create a metric column
 
     const applicationName = getApplicationFromWheres({ wheres })
-    const metric = getMetricFromShortcut(select)
+    const { metric } = getMetricFromShortcut(select)
     if (selects[0] === 'bt') {
       const metricWidgetData = data.bt.map(({ internalName, tierName }) => ({
         applicationName,
@@ -47,6 +47,7 @@ export default ({
         ...createMetricColumn({
           metricWidgetData,
           x: DEFAULT_WIDTH * selectIndex,
+          formatString: getMetricFromShortcut(select).formatString,
         }),
       ]
     }
