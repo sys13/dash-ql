@@ -4,7 +4,19 @@ const getSelects = ({ query }) => {
   const selectRegex = /select(.*)from/i
   const allSelect = selectRegex.exec(query)
   const selects = allSelect[1].split(',').map(s => s.trim())
-  return selects
+  const selectsWithAs = selects.map(select => {
+    const asRegex = /(.*) as (.*)/i
+    const asResults = asRegex.exec(select)
+    if (asResults) {
+      return {
+        value: asResults[1],
+        as: asResults[2].substr(1, asResults[2].length - 2),
+      }
+    } else {
+      return { value: select }
+    }
+  })
+  return selectsWithAs
 }
 
 const getFrom = ({ query }) => {

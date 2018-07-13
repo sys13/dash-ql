@@ -12,14 +12,15 @@ Create AppD dashboards at lightning speed with a query language
 ## Development
 
 ### Features
+- [x] shortforms: (art = Average Response Time (ms), etc.)
 - [x] headers
 - [x] default metric format strings
+- [x] AS
 - [] add a title
 - [] more than just bts
 - [] WHERE on a name/label
 - [] WHERE operators (>, <, REGEX, etc.)
 - [] WHERE on metric values (current art > x)
-- [] AS
 - [] SORT BY
 - [] LIMIT
 - [] query autocomplete
@@ -29,7 +30,6 @@ Create AppD dashboards at lightning speed with a query language
 - [] create multiple dashboards at once
 - [] save queries
 - [] more metric types: browser, mobile, DB, SIM
-- [] shortforms: (art = Average Response Time (ms), etc.)
 - [] styling/theming
 - [] add logo
 - [] table grid lines

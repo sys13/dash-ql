@@ -12,9 +12,9 @@ const LABEL_ENTITIES = ['bt', 'tier', 'backend']
 export default ({
   selects, selectIndex, data, wheres,
 }) => {
-  const select = selects[selectIndex]
+  const select = selects[selectIndex].value
   const header = createHeader({
-    labelText: getMetricFromShortcut(select).metric,
+    labelText: selects[selectIndex].as || getMetricFromShortcut(select).metric,
     x: selectIndex,
   })
 
@@ -35,7 +35,7 @@ export default ({
 
     const applicationName = getApplicationFromWheres({ wheres })
     const { metric } = getMetricFromShortcut(select)
-    if (selects[0] === 'bt') {
+    if (selects[0].value === 'bt') {
       const metricWidgetData = data.bt.map(({ internalName, tierName }) => ({
         applicationName,
         metricPath: `Business Transaction Performance|Business Transactions|${tierName}|${internalName}|${metric}`,
