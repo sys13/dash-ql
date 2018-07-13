@@ -16,11 +16,12 @@ Create AppD dashboards at lightning speed with a query language
 - [x] headers
 - [x] default metric format strings
 - [x] AS
+- [x] WHERE on a name/label with = or REGEX
+- [] add tier to bts
 - [] add a title
 - [] more than just bts
-- [] WHERE on a name/label
-- [] WHERE operators (>, <, REGEX, etc.)
 - [] WHERE on metric values (current art > x)
+- [] WHERE OR operator and nesting
 - [] SORT BY
 - [] LIMIT
 - [] query autocomplete
@@ -29,11 +30,13 @@ Create AppD dashboards at lightning speed with a query language
 - [] specify dashboard name
 - [] create multiple dashboards at once
 - [] save queries
-- [] more metric types: browser, mobile, DB, SIM
+- [] more metric types: browser, mobile, DB, SIM, IoT
 - [] styling/theming
 - [] add logo
 - [] table grid lines
 - [] electron app
+- [] help docs
+- [] prebuilt dashboards
 - [] preview dashboard before deploying
 - [] share dashboard formulas
 

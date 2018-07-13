@@ -36,10 +36,10 @@ export default ({
     const applicationName = getApplicationFromWheres({ wheres })
     const { metric } = getMetricFromShortcut(select)
     if (selects[0].value === 'bt') {
-      const metricWidgetData = data.bt.map(({ internalName, tierName }) => ({
+      const metricWidgetData = data.bt.map(({ internalName, tier }) => ({
         applicationName,
-        metricPath: `Business Transaction Performance|Business Transactions|${tierName}|${internalName}|${metric}`,
-        entityName: tierName,
+        metricPath: `Business Transaction Performance|Business Transactions|${tier}|${internalName}|${metric}`,
+        entityName: tier,
       }))
 
       return [

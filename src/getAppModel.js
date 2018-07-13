@@ -1,8 +1,9 @@
-import { options, baseURL } from './requestOptions'
+import _ from 'lodash'
 import rp from 'request-promise'
+import { options, baseURL } from './requestOptions'
 
 export const getApps = async () => {
-  return await rp({
+  return rp({
     ...options,
     url: `${baseURL}/rest/applications?output=json`,
   })
@@ -18,7 +19,7 @@ export const getApps = async () => {
 }
 
 export const getTiers = async ({ applicationName }) => {
-  return await rp({
+  return rp({
     ...options,
     url: `${baseURL}/rest/applications/${applicationName}/tiers?output=json`,
   })
@@ -33,16 +34,40 @@ export const getTiers = async ({ applicationName }) => {
     })
 }
 
-export const getBTs = async ({ applicationName }) => {
-  return await rp({
+export const getBTs = async ({ applicationName, wheres }) => {
+  return rp({
     ...options,
     url: `${baseURL}/rest/applications/${applicationName}/business-transactions?output=json`,
   })
     .promise()
     .then(data => {
-      const parsedData = JSON.parse(data)
-      console.log(parsedData)
-      return parsedData
+      const parsedData = JSON.parse(data).map(bt => ({
+        ...bt,
+        tier: bt.tierName,
+      }))
+
+      let filteredData = parsedData
+      const filters = _.intersection(wheres.map(({ field }) => field), [
+        'bt',
+        'tier',
+      ])
+
+      filters.forEach(filter => {
+        const { field, operator, value } = wheres.find(
+          where => where.field === filter,
+        )
+        const contextField = field === 'bt' ? 'name' : field
+        filteredData = filteredData.filter(bt => {
+          if (operator === '=') {
+            return bt[contextField] === value
+          } else if (operator === 'REGEXP') {
+            return new RegExp(value, 'i').test(bt[contextField])
+          } else {
+            return true
+          }
+        })
+      })
+      return filteredData
     })
     .catch(err => {
       console.log(err)

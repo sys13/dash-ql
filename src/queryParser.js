@@ -29,9 +29,9 @@ const getFrom = ({ query }) => {
 const getWhere = ({ query }) => {
   const whereRegex = /where(.*)/i
   const allWhere = whereRegex.exec(query)
-  const wheres = allWhere[1].split(',').map(s => s.trim())
+  const wheres = allWhere[1].split('AND').map(s => s.trim())
   const tokenizedWheres = wheres.map(where => {
-    const delimeterRegex = /(.*?) ?(=) ?\"(.*)\"/
+    const delimeterRegex = /(.*?) ?(=|REGEXP) ?"(.*)"$/
     const [, field, operator, value] = delimeterRegex.exec(where)
     return { field, operator, value }
   })
@@ -52,6 +52,6 @@ export default ({ query }) => {
   const selects = getSelects({ query })
   const { from } = getFrom({ query })
   const wheres = getWhere({ query })
-  console.log(selects, from, wheres)
+  console.log({ selects, from, wheres })
   return { selects, from, wheres }
 }

@@ -7,16 +7,16 @@ import createDashboard from './createDashboard'
 
 const main = async () => {
   const DASHBOARD_NAME = 'z_dan_2'
-  const query = 'SELECT bt, art AS "Response Time", cpm, epm FROM applications WHERE application = "2075ICE.PREPROD"'
+  const query = 'SELECT bt, art AS "Response Time", cpm, epm FROM applications WHERE application = "2075ICE.PREPROD" AND bt REGEXP "AdaptiveAuthentication"'
 
-  const { selects, from, wheres } = queryParser({ query })
+  const { selects, wheres } = queryParser({ query })
 
   // TODO: maybe this should be a gather data method
   // TODO: only get bt info if in select
   const applicationName = getApplicationFromWheres({ wheres })
-  const bt = await getBTs({ applicationName })
-  const data = { bt }
+  const bt = await getBTs({ applicationName, wheres })
 
+  const data = { bt }
   const widgets = selects.map((s, index) => getColumnFromSelect({
     selects,
     selectIndex: index,
